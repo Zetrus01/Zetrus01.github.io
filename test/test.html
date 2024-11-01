@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Kezdőlap - Online Book Library</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #130f40;
+            font-family: 'Lato', sans-serif;
+            transition: margin-left 0.3s; /* Smooth transition for margin */
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            height: 100%;
+            position: fixed; /* Fix the sidebar */
+            left: -250px; /* Initially hidden */
+            transition: left 0.3s; /* Smooth transition for sliding */
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex; /* Use flexbox for icon and text */
+            align-items: center; /* Center items vertically */
+            padding: 10px; /* Add padding for better click area */
+            border-radius: 5px; /* Rounded corners */
+            transition: background 0.3s; /* Smooth background transition */
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #4654e1; /* Change background on hover */
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        /* Main content styles */
+        .main-content {
+            margin-left: 0; /* No margin initially */
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            transition: margin-left 0.3s; /* Smooth transition for margin */
+            position: relative; /* Position relative for absolute positioning of search box */
+        }
+
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  margin-top:1%;
+  margin-left: 80%;
+}
+.input-search{
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #22a6b3;
+  padding-right: 40px;
+  color:#fff;
+}
+.input-search::placeholder{
+  color:rgba(255,255,255,.5);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search{
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:#ffffff ;
+  background-color:transparent;
+  pointer-events: painted;  
+}
+.btn-search:focus ~ .input-search{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.container{
+    margin:100px 0 0 200px;
+    width:70%;
+    height:450px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.container img {
+    width:10%;
+    height:100%;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.684);
+    transition: all ease-in-out 0.5s;
+}
+.container img:hover{
+    width:25%;
+}
+form {
+    background-color: #4654e1;
+    width: 300px;
+    height: 44px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+    </style>
+</head>
+<body>
+
+    <button class="toggle-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+    <div class="sidebar">
+        <h2>Book Library</h2>
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="#genres"><i class="fas fa-bookmark"></i> Genres</a></li>
+            <li><a href="#new-arrivals"><i class="fas fa-clock"></i> New Arrivals</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="search-box">
+            <input type="text" class="input-search" placeholder="Type to Search...">
+            <button class="btn-search" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="container">
+            <img src="1.jpg" alt="Image 1">
+            <img src="2.jpg" alt="Image 2">
+            <img src="3.jpg" alt="Image 3">
+            <img src="4.jpg" alt="Image 4">
+            <img src="5.jpg" alt="Image 5">
+        </div>
+    </div>
+
+    <script>
+        let sidebarOpen = false; // Flag to track sidebar state
+
+        function toggleSidebar() {
+            if (sidebarOpen) {
+                document.body.style.marginLeft = '0'; // Reset margin
+                document.querySelector('.sidebar').style.left = '-250px'; // Hide sidebar
+                sidebarOpen = false;
+            } else {
+                document.body.style.marginLeft = '250px'; // Set margin for sidebar
+                document.querySelector('.sidebar').style.left = '0'; // Show sidebar
+                sidebarOpen = true;
+            }
+        }
+
+        function toggleSearch() {
+            const input = document.querySelector('.input-search');
+            input.classList.toggle('active'); // Toggle the active class
+            if (input.classList.contains('active')) {
+                input.focus(); // Focus on the input when it becomes active
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!-- Coding by CodingLab | www.codinglabweb.com -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    
+    <title>Dashboard Sidebar Menu</title> 
+</head>
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="book.png" id="logo">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">PocketBooks</span>
+                    <span class="profession">Online Könyvtár</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Kezdőlap</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                            <span class="text nav-text">Revenue</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Értesítések</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-heart icon' ></i>
+                            <span class="text nav-text">Kedvelt könyvek </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">Wallets</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Bejelentkezés</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Sötét mód</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="main-content">
+
+        <div class="search-box">
+            <input type="text" class="input-search" placeholder="Keresés..">
+            <button class="btn-search" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="container">
+            <p>Harry Potter sorozat</p><br>
+            <img src="images/harry1.jpg" alt="Image 1">
+            <img src="images/harry2.jpg" alt="Image 2">
+            <img src="images/harry3.jpg" alt="Image 3">
+            <img src="images/harry4.jpg" alt="Image 4">
+            <img src="images/harry5.jpg" alt="Image 5">
+            <img src="images/harry6.jpg" alt="Image 5">
+            <img src="images/harry7.jpg" alt="Image 5">
+            <img src="images/harry8.jpg" alt="Image 5">
+           
+
+        </div>
+        <div class="container">
+            <img src="images/witcher0.jpg" alt="Image 1">
+            <img src="images/witcher1.jpg" alt="Image 1">
+            <img src="images/witcher2.jpg" alt="Image 2">
+            <img src="images/witcher3.jpg" alt="Image 3">
+            <img src="images/witcher4.jpg" alt="Image 4">
+            <img src="images/witcher5.jpg" alt="Image 5">
+            <img src="images/witcher6.jpg" alt="Image 5">
+            <img src="images/witcher7.jpg" alt="Image 5">
+        </div>
+        <div class="container">
+            <img src="1.jpg" alt="Image 1">
+            <img src="2.jpg" alt="Image 2">
+            <img src="3.jpg" alt="Image 3">
+            <img src="4.jpg" alt="Image 4">
+            <img src="5.jpg" alt="Image 5">
+        </div>
+        <div class="container">
+            <img src="1.jpg" alt="Image 1">
+            <img src="2.jpg" alt="Image 2">
+            <img src="3.jpg" alt="Image 3">
+            <img src="4.jpg" alt="Image 4">
+            <img src="5.jpg" alt="Image 5">
+        </div>
+    </div>
+
+
+
+
+    <script src="script/script.js"></script>
+<script>
+           function toggleSearch() {
+            const input = document.querySelector('.input-search');
+            input.classList.toggle('active'); // Toggle the active class
+            if (input.classList.contains('active')) {
+                input.focus(); // Focus on the input when it becomes active
+            }
+        }
+
+</script>
+
+</body>
+</html>
