@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hu" >
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Image Carousel ( Animation )</title>
+  <link rel="stylesheet" href="harrytest.css">
+
+</head>
+<body>
+  <nav-bar class="sidebar close">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="book.png" id="logo">
+            </span>
+
+            <div class="text logo-text">
+                <span class="name">PocketBooks</span>
+                <span class="profession">Online Könyvtár</span>
+            </div>
+        </div>
+
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Kezdőlap</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-bar-chart-alt-2 icon' ></i>
+                        <span class="text nav-text">Revenue</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text">Értesítések</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-pie-chart-alt icon' ></i>
+                        <span class="text nav-text">Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-heart icon' ></i>
+                        <span class="text nav-text">Kedvelt könyvek </span>
+                    </a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="#">
+                        <i class='bx bx-wallet icon' ></i>
+                        <span class="text nav-text">Wallets</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <li class="">
+                <a href="#">
+                    <i class='bx bx-log-out icon' ></i>
+                    <span class="text nav-text">Bejelentkezés</span>
+                </a>
+            </li>
+
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Sötét mód</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </li>
+            
+        </div>
+    </div>
+
+</nav-bar>
+
+<!-- partial:index.partial.html -->
+<main>
+  <ul class='slider'>
+   <li class='item' style="background-image: url('../images/harry1.jpg');">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter könyv sorozat"</h2>
+        <p class='description'> Lorem ipsum, dolor sit amet consectetur
+        adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+        praesentium nisi. Id laboriosam ipsam enim.  </p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('../images/harry_background.jpg')">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter könyv sorozat"</h2>
+        <p class='description'> A Harry Potter J. K. Rowling hét kötetből álló, fantasy műfajú regénysorozata. Főhőse egy kamasz varázsló, Harry Potter, és az ő barátai, Ron Weasley és Hermione Granger, akik a Roxfort Boszorkány- és Varázslóképző Szakiskola tanulói. A történet arról szól, miként próbálja meg Harry legyőzni a gonosz varázslót, Voldemort Nagyurat  </p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('../images/harry1.png');">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter és a Bölcsek köve"</h2>
+        <p class='description'> Harry Potter árva kisfiú, szülei meghaltak egyéves korában. Nagynénje családjánál nevelkedik, akik utálatosan viselkednek vele. A 11. születésnapján megtudja egy óriástól, kinek varázspálcája az esernyőjében van, hogy varázsló, és felvételt nyert a Roxfort Boszorkány- és Varázslóképző Szakiskolába. A szülei is varázslók voltak, de Voldemort, a gonosz varázsló, megölte őket. Amikor Harryt akarta meggyilkolni, a varázslat visszacsapott és végletesen meggyengítette Voldemort-t.  </p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('../images/harry2.png');">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter és a Titkok kamrája"</h2>
+        <p class='description'>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.
+        </p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('../images/harry3.png');">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter és az Azkabani fogoly"</h2>
+        <p class='description'>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.
+        </p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('../images/harry4.png')">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter és a Tűz Serlege"</h2>
+        <p class='description'> Lorem ipsum, dolor sit amet consectetur
+        adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+        praesentium nisi. Id laboriosam ipsam enim.  </p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    <li class='item' style="background-image: url('../images/harry5.png');">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter és a Főnix Rendje"</h2>
+        <p class='description'> A Harry Potter és a Főnix Rendje című regényben Harry Potter szembesül a varázslóvilág sötét oldalával, miközben új barátokat szerez és egy titkos társaságot alapít, hogy harcoljon Voldemort ellen.</p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    
+    <li class='item' style="background-image: url('../images/harry6.png');">
+      <div class='content'>
+        <h2 class='title'>"Harry Potter és a Félvér Herceg"</h2>
+        <p class='description'> A Félvér Herceg története során Harry felfedezi Voldemort múltját, miközben a Roxfortban új titkokra és veszélyekre bukkan. A barátságok próbára vannak téve, és a sötétség egyre közelebb kerül.</p>
+        <button>Olvass többet..</button>
+      </div>
+    </li>
+    
+  </ul>
+  <nav class='nav'>
+    <ion-icon class='btn prev' name="arrow-back-outline"></ion-icon>
+    <ion-icon class='btn next' name="arrow-forward-outline"></ion-icon>
+  </nav>
+</main>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- partial -->
+  <script  src="harrypotter.js"></script>
+
+</body>
+</html>
