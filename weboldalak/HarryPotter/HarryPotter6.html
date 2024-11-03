@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Kétoldalas PDF Megjelenítő</title>
+    <style>
+        #pdf-render {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        canvas {
+            max-width: 37%; /* Canvas maximum szélessége a konténer szélessége */
+            height: auto; /* Magasság automatikusan */
+            border: 1px solid black;
+            border-radius: 15px;
+        }   
+
+        #next-page, #prev-page {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            z-index: 10; /* Gombok a háttér előtt */
+        }
+
+        #prev-page {
+            left: 0px; /* Bal oldal */
+            top: 50%; /* Középre igazítás */
+            transform: translateY(-50%); /* Középre igazítás */
+        }
+
+        #next-page {
+            right: 0px; /* Jobb oldal */
+            top: 50%; /* Középre igazítás */
+            transform: translateY(-50%); /* Középre igazítás */
+        }
+
+        #page-info {
+            text-align: center; /* Középre igazítás */
+            margin-top: 10px; /* Térköz a gombok alatt */
+            font-size: 18px; /* Betűméret */
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="../../book.png" id="logo">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">PocketBooks</span>
+                    <span class="profession">Online Könyvtár</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <ul class="menu-links">
+                    <li class="nav-link"><a href="../../index.html"><i class='bx bx-home-alt icon'></i><span class="text nav-text">Kezdőlap</span></a></li>
+                    <li class="nav-link"><a href="#"><i class='bx bx-bar-chart-alt-2 icon'></i><span class="text nav-text">Újdonságok</span></a></li>
+                    <li class="nav-link"><a href="#"><i class='bx bx-bell icon'></i><span class="text nav-text">Értesítések</span></a></li>
+                    <li class="nav-link"><a href="#"><i class='bx bx-pie-chart-alt icon'></i><span class="text nav-text">Javaslatok</span></a></li>
+                    <li class="nav-link"><a href="#"><i class='bx bx-heart icon'></i><span class="text nav-text">Kedvelt könyvek</span></a></li>
+                    <li class="nav-link"><a href="#"><i class='bx bx-wallet icon'></i><span class="text nav-text">Nyelv</span></a></li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="../weboldalak/login.html"><i class='bx bx-log-out icon'></i><span class="text nav-text">Bejelentkezés</span></a>
+                </li>
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Sötét mód</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+    <div class="search-box">
+        <input type="text" id="searchInput" class="input-search" placeholder="Keresés..">
+        <button class="btn-search" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+    </div>
+
+    <div id="pdf-render">
+        <button title="Előző oldal" id="prev-page"><i class="fas fa-chevron-left"></i></button>
+        <canvas id="pdf-canvas-1"></canvas>
+        <canvas id="pdf-canvas-2"></canvas>
+        <button title="Következő oldal" id="next-page"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    
+    <div id="page-info">
+        <span id="current-page">1</span> / <span id="total-pages">0</span>
+    </div>
+    
+    <!-- PDF.js CDN betöltése -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+        // PDF.js alapkonfiguráció
+        const url = '../../pdf/HarryPotter-6.pdf';
+        let pdfDoc = null,
+            pageNum = 1;
+    
+        // PDF betöltése
+        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+            pdfDoc = pdfDoc_;
+            document.getElementById('total-pages').textContent = pdfDoc.numPages; // Teljes oldalszám
+            renderPage();
+        });
+    
+        // Oldalak megjelenítése
+        function renderPage() {
+            const canvas1 = document.getElementById('pdf-canvas-1');
+            const canvas2 = document.getElementById('pdf-canvas-2');
+            const ctx1 = canvas1.getContext('2d');
+            const ctx2 = canvas2.getContext('2d');
+            const scale = 1.6; // 80%-os nagyítás
+
+            // Első oldal renderelése
+            pdfDoc.getPage(pageNum).then(page => {
+                const viewport = page.getViewport({ scale: scale });
+                canvas1.height = viewport.height;
+                canvas1.width = viewport.width;
+                page.render({ canvasContext: ctx1, viewport: viewport });
+
+                // Oldalszám frissítése
+                document.getElementById('current-page').textContent = pageNum;
+            });
+
+            // Második oldal renderelése
+            if (pageNum + 1 <= pdfDoc.numPages) {
+                pdfDoc.getPage(pageNum + 1).then(page => {
+                    const viewport = page.getViewport({ scale: scale });
+                    canvas2.height = viewport.height;
+                    canvas2.width = viewport.width;
+                    page.render({ canvasContext: ctx2, viewport: viewport });
+                });
+            } else {
+                ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+            }
+        }
+    
+        // Navigáció
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (pageNum <= 1) return; // Ne engedje, hogy az 1-nél kisebb oldalra lépjen
+            pageNum -= 2;
+            renderPage();
+        });
+    
+        document.getElementById('next-page').addEventListener('click', () => {
+            if (pageNum + 2 > pdfDoc.numPages) return; // Ne engedje, hogy a létező oldalak után lépjen
+            pageNum += 2;
+            renderPage();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.querySelector('body'),
+                  sidebar = body.querySelector('nav'),
+                  toggle = body.querySelector(".toggle"),
+                  searchBtn = body.querySelector(".search-box"),
+                  modeSwitch = body.querySelector(".toggle-switch"),
+                  modeText = body.querySelector(".mode-text"),
+                  logo = sidebar.querySelector('#logo');
+
+            toggle.addEventListener("click" , () => {
+                sidebar.classList.toggle("close");
+            });
+
+            searchBtn.addEventListener("click" , () => {
+                sidebar.classList.remove("close");
+            });
+
+            modeSwitch.addEventListener("click" , () => {
+                body.classList.toggle("dark");
+                
+                if(body.classList.contains("dark")){
+                    modeText.innerText = "Világos mód";
+                    logo.src = '../../open-book.png';
+                } else {
+                    modeText.innerText = "Sötét mód";
+                    logo.src = '../../book.png';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
