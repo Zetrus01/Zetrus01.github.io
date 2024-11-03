@@ -432,3 +432,42 @@ body.dark .home .text{
         color: #000; /* Change arrow color if needed */
         transition: none !important; /* Ensure no transition is applied to the arrow */
     }
+    .search-results-container {
+        margin-left: 15%;
+        margin-right: 10%;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        margin-top: 10px;
+        z-index: 1000;
+    }
+    
+    .search-result {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        text-align: center;
+        width: 120px; /* Megadhatod a kívánt szélességet */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+    }
+    
+    .search-result img {
+        width: 100%; /* Képek szélessége */
+        height: auto; /* Magasság automatikusan */
+        border-radius: 5px;
+        display: block;
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .search-result a {
+        width: 100%; /* Képek szélessége */
+        height: auto; /* Magasság automatikusan */
+        border-radius: 5px;
+        display: block;
+        color: #333;
+        text-decoration: none;
+    }
