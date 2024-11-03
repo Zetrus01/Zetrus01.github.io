@@ -1,43 +1,33 @@
-// Ensure the DOM is fully loaded before running the script
 document.addEventListener("DOMContentLoaded", function() {
-    const timeline = gsap.timeline({ paused: true, reversed: true }), // Use gsap.timeline
-          $circle = document.querySelector(".circle"),
-          $stick = document.querySelector(".stick"),
-          $close = document.querySelector(".close"),
-          $searchField = document.querySelector(".field"),
-          transitionSpeed = 0.5;
+    // Toggle Search Function
+    window.toggleSearch = function() {
+        const input = document.querySelector('.input-search');
+        input.classList.toggle('active');
+        if (input.classList.contains('active')) {
+            input.focus();
+        }
+    };
 
-    // Animation timeline
-    timeline.to($circle, transitionSpeed, {
-        className: "+=active"
-    }, 0)
-    .to($stick, transitionSpeed, {
-        className: "+=active"
-    }, 0)
-    .to($searchField, transitionSpeed, {
-        width: "200px", // Expand the width of the input field
-        opacity: 1,
-        display: "block"
-    }, 0)
-    .to($close, 0.2, {
-        display: "block",
-        opacity: 1,
-        zIndex: 3
-    });
+    // Search Functionality
+    const searchInput = document.getElementById('searchInput');
+    const images = document.querySelectorAll('.searchable');
 
-    // Click event handler for the circle
-    $circle.addEventListener("click", function() {
-        if (timeline.reversed()) {
-            timeline.play();
-        } else {
-            timeline.reverse();
+    searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase();
+        let hasResults = false;
+
+        images.forEach(image => {
+            const altText = image.alt ? image.alt.toLowerCase() : "";
+            if (altText.includes(filter)) {
+                image.style.display = "";
+                hasResults = true;
+            } else {
+                image.style.display = "none";
+            }
+        });
+
+        if (!hasResults) {
+            console.log("Nincs találat a keresésre!");
         }
     });
-
-    // Click event handler for the close button
-    $close.addEventListener("click", function() {
-        timeline.reverse();
-    });
 });
-
-
