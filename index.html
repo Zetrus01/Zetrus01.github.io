@@ -68,32 +68,32 @@
             <button class="btn-search" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
         </div>
 
-        <div class="container" id="harryPotterContainer">
+        <div class="container" id="harryPotterContainer" class="searchable">
             <div class="title">
-                <a href="weboldalak/harrypotter.html" class="searchable">Harry Potter sorozat</a>
+                <a href="weboldalak/HarryPotter/harrypotter.html">Harry Potter sorozat</a>
             </div>
-            <img src="images/harry1.jpeg" alt="Harry Potter 1" class="searchable">
-            <img src="images/harry2.png" alt="Harry Potter 2" class="searchable">
-            <img src="images/harry3.png" alt="Harry Potter 3" class="searchable">
-            <img src="images/harry4.png" alt="Harry Potter 4" class="searchable">
-            <img src="images/harry5.png" alt="Harry Potter 5" class="searchable">
-            <img src="images/harry6.png" alt="Harry Potter 6" class="searchable">
-            <img src="images/harry7.jpg" alt="Harry Potter 7" class="searchable">
-            <img src="images/harry8.jpg" alt="Harry Potter 8" class="searchable">
+            <img src="images/harry1.jpeg" alt="Harry Potter 1 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry2.png" alt="Harry Potter 2 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry3.png" alt="Harry Potter 3 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry4.png" alt="Harry Potter 4 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry5.png" alt="Harry Potter 5 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry6.png" alt="Harry Potter 6 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry7.jpg" alt="Harry Potter 7 - Fantasy thriller regény" class="searchable">
+            <img src="images/harry8.jpg" alt="Harry Potter 8 - Fantasy thriller regény" class="searchable">
         </div>
 
-        <div class="container" id="witcherContainer">
+        <div class="container" id="witcherContainer" class="searchable">
             <div class="title">
-                <a href="weboldalak/witcher.html" class="searchable">Witcher sorozat</a>
+                <a href="weboldalak/witcher.html">Witcher sorozat</a>
             </div>
-            <img src="images/witcher0.jpg" alt="Witcher 0" class="searchable">
-            <img src="images/witcher1.jpg" alt="Witcher 1" class="searchable">
-            <img src="images/witcher2.jpg" alt="Witcher 2" class="searchable">
-            <img src="images/witcher3.jpg" alt="Witcher 3" class="searchable">
-            <img src="images/witcher4.jpg" alt="Witcher 4" class="searchable">
-            <img src="images/witcher5.jpg" alt="Witcher 5" class="searchable">
-            <img src="images/witcher6.jpg" alt="Witcher 6" class="searchable">
-            <img src="images/witcher7.jpg" alt="Witcher 7" class="searchable">
+            <img src="images/witcher0.jpg" alt="Witcher 0 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher1.jpg" alt="Witcher 1 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher2.jpg" alt="Witcher 2 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher3.jpg" alt="Witcher 3 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher4.jpg" alt="Witcher 4 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher5.jpg" alt="Witcher 5 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher6.jpg" alt="Witcher 6 - Fantasy Dráma Kaland Akció" class="searchable">
+            <img src="images/witcher7.jpg" alt="Witcher 7 - Fantasy Dráma Kaland Akció" class="searchable">
         </div>
 
         <div class="container">
@@ -114,39 +114,72 @@
 
     <script src="script/script.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Toggle Search Function
-            window.toggleSearch = function() {
-                const input = document.querySelector('.input-search');
-                input.classList.toggle('active');
-                if (input.classList.contains('active')) {
-                    input.focus();
-                }
-            };
+ document.addEventListener("DOMContentLoaded", function() {
+    window.toggleSearch = function() {
+        const input = document.querySelector('.input-search');
+        input.classList.toggle('active');
+        if (input.classList.contains('active')) {
+            input.focus();
+        }
+    };
 
-            // Search Functionality
-            const searchInput = document.getElementById('searchInput');
-            const images = document.querySelectorAll('.searchable');
+    const searchInput = document.getElementById('searchInput');
+    const searchableElements = document.querySelectorAll('.searchable');
 
-            searchInput.addEventListener('keyup', function() {
-                const filter = searchInput.value.toLowerCase();
-                let hasResults = false;
+    const searchResultsContainer = document.createElement('div');
+    searchResultsContainer.classList.add('search-results-container');
+    searchResultsContainer.style.display = "none";
+    searchInput.parentNode.insertAdjacentElement('afterend', searchResultsContainer);
 
-                images.forEach(image => {
-                    const altText = image.alt ? image.alt.toLowerCase() : "";
-                    if (altText.includes(filter)) {
-                        image.style.display = "";
-                        hasResults = true;
-                    } else {
-                        image.style.display = "none";
-                    }
-                });
+    searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase().trim();
+        resetElementsToOriginalPosition(); // Reset elements at the start
 
-                if (!hasResults) {
-                    console.log("Nincs találat a keresésre!");
-                }
-            });
+        if (filter === "") {
+            searchResultsContainer.innerHTML = ""; // Clear previous results
+            return;
+        }
+
+        let hasResults = false;
+        searchResultsContainer.innerHTML = ""; // Clear previous results
+
+        searchableElements.forEach(element => {
+            const textContent = element.textContent.toLowerCase();
+            const altText = element.alt ? element.alt.toLowerCase() : "";
+
+            // Log all the relevant information
+            console.log(`Text Content: ${textContent}, Alt Text: ${altText}, Filter: ${filter}`);
+
+            if (textContent.includes(filter) || altText.includes(filter)) {
+                const clone = element.cloneNode(true);
+                clone.classList.add('search-result');
+                searchResultsContainer.appendChild(clone);
+                hasResults = true;
+                console.log(`Match found: ${textContent}`); // Log match found
+            }
         });
+
+        displaySearchResults(hasResults);
+    });
+
+    function resetElementsToOriginalPosition() {
+        searchableElements.forEach(element => {
+            element.style.display = ""; // Show all elements
+        });
+        searchResultsContainer.style.display = "none"; // Hide results container
+    }
+
+    function displaySearchResults(hasResults) {
+        if (hasResults) {
+            searchResultsContainer.style.display = "block"; // Show results
+            console.log("Results displayed: ", searchResultsContainer.children.length);
+        } else {
+            searchResultsContainer.style.display = "none";
+            console.log("No results found!");
+        }
+    }
+});
+
     </script>
 </body>
 </html>
