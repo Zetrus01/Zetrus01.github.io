@@ -11,50 +11,80 @@
     <title>Kétoldalas PDF Megjelenítő</title>
     <style>
         #pdf-render {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        canvas {
-            max-width: 37%; /* Canvas maximum szélessége a konténer szélessége */
-            height: auto; /* Magasság automatikusan */
-            border: 1px solid black;
-            border-radius: 15px;
-        }   
-
-        #next-page, #prev-page {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 5px;
-            z-index: 10; /* Gombok a háttér előtt */
-        }
-
-        #prev-page {
-            left: 0px; /* Bal oldal */
-            top: 50%; /* Középre igazítás */
-            transform: translateY(-50%); /* Középre igazítás */
-        }
-
-        #next-page {
-            right: 0px; /* Jobb oldal */
-            top: 50%; /* Középre igazítás */
-            transform: translateY(-50%); /* Középre igazítás */
-        }
-
-        #page-info {
-            text-align: center; /* Középre igazítás */
-            margin-top: 10px; /* Térköz a gombok alatt */
-            font-size: 18px; /* Betűméret */
-        }
-    </style>
+                   position: relative;
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                   gap: 10px;
+                   margin-top: 5px;
+               }
+       
+               canvas {
+                   max-width: 37%; /* Canvas maximum szélessége a konténer szélessége */
+                   height: auto; /* Magasság automatikusan */
+                   border: 1px solid black;
+                   border-radius: 15px;
+               }   
+       
+               #next-page, #prev-page {
+                   background-color: #007bff;
+                   color: white;
+                   border: none;
+                   padding: 10px 15px;
+                   cursor: pointer;
+                   font-size: 14px;
+                   border-radius: 5px;
+                   z-index: 10; /* Gombok a háttér előtt */
+               }
+       
+               #prev-page {
+                   left: 0px; /* Bal oldal */
+                   top: 50%; /* Középre igazítás */
+                   transform: translateY(-50%); /* Középre igazítás */
+               }
+       
+               #next-page {
+                   right: 0px; /* Jobb oldal */
+                   top: 50%; /* Középre igazítás */
+                   transform: translateY(-50%); /* Középre igazítás */
+               }
+       
+               #page-info {
+                   text-align: center; /* Középre igazítás */
+                   margin-top: 10px; /* Térköz a gombok alatt */
+                   font-size: 18px; /* Betűméret */
+               }
+               @media (max-width: 460px) {
+                   #pdf-canvas-2 {
+                       display: none; /* Mobil képernyőn nem jelenik meg */
+                   }
+                   canvas {
+                   max-width: 40%; /* Canvas maximum szélessége a konténer szélessége */
+                   height: 120%; /* Magasság automatikusan */
+                   border: 1px solid black;
+                   border-radius: 15px;
+                   margin-left: 10%;
+                   margin-top:20%;
+               }  
+               }
+       
+               /* Nagyobb képernyőkön mindkét oldal és a gombok is megjelennek */
+               @media (min-width: 768px) {
+                   #pdf-canvas-2 {
+                       display: block; /* A második canvas csak nagyobb képernyőkön jelenik meg */
+                   }
+       
+                   #next-page {
+                       display: inline-block;
+                   }
+                   canvas {
+                   max-width: 40%; /* Canvas maximum szélessége a konténer szélessége */
+                   height: auto; /* Magasság automatikusan */
+                   border: 1px solid black;
+                   border-radius: 15px;
+               }  
+               }
+           </style>
 </head>
 <body>
     <nav class="sidebar close">
@@ -121,93 +151,9 @@
     <!-- PDF.js CDN betöltése -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script>
-        // PDF.js alapkonfiguráció
-        const url = '../../pdf/HarryPotter/HarryPotter-4.pdf';
-        let pdfDoc = null,
-            pageNum = 1;
-    
-        // PDF betöltése
-        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-            pdfDoc = pdfDoc_;
-            document.getElementById('total-pages').textContent = pdfDoc.numPages; // Teljes oldalszám
-            renderPage();
-        });
-    
-        // Oldalak megjelenítése
-        function renderPage() {
-            const canvas1 = document.getElementById('pdf-canvas-1');
-            const canvas2 = document.getElementById('pdf-canvas-2');
-            const ctx1 = canvas1.getContext('2d');
-            const ctx2 = canvas2.getContext('2d');
-            const scale = 1.6; // 80%-os nagyítás
-
-            // Első oldal renderelése
-            pdfDoc.getPage(pageNum).then(page => {
-                const viewport = page.getViewport({ scale: scale });
-                canvas1.height = viewport.height;
-                canvas1.width = viewport.width;
-                page.render({ canvasContext: ctx1, viewport: viewport });
-
-                // Oldalszám frissítése
-                document.getElementById('current-page').textContent = pageNum;
-            });
-
-            // Második oldal renderelése
-            if (pageNum + 1 <= pdfDoc.numPages) {
-                pdfDoc.getPage(pageNum + 1).then(page => {
-                    const viewport = page.getViewport({ scale: scale });
-                    canvas2.height = viewport.height;
-                    canvas2.width = viewport.width;
-                    page.render({ canvasContext: ctx2, viewport: viewport });
-                });
-            } else {
-                ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-            }
-        }
-    
-        // Navigáció
-        document.getElementById('prev-page').addEventListener('click', () => {
-            if (pageNum <= 1) return; // Ne engedje, hogy az 1-nél kisebb oldalra lépjen
-            pageNum -= 2;
-            renderPage();
-        });
-    
-        document.getElementById('next-page').addEventListener('click', () => {
-            if (pageNum + 2 > pdfDoc.numPages) return; // Ne engedje, hogy a létező oldalak után lépjen
-            pageNum += 2;
-            renderPage();
-        });
+        window.pdfUrl = '../../pdf/HarryPotter/HarryPotter-4.pdf';  // Globális változó
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const body = document.querySelector('body'),
-                  sidebar = body.querySelector('nav'),
-                  toggle = body.querySelector(".toggle"),
-                  searchBtn = body.querySelector(".search-box"),
-                  modeSwitch = body.querySelector(".toggle-switch"),
-                  modeText = body.querySelector(".mode-text"),
-                  logo = sidebar.querySelector('#logo');
-
-            toggle.addEventListener("click" , () => {
-                sidebar.classList.toggle("close");
-            });
-
-            searchBtn.addEventListener("click" , () => {
-                sidebar.classList.remove("close");
-            });
-
-            modeSwitch.addEventListener("click" , () => {
-                body.classList.toggle("dark");
-                
-                if(body.classList.contains("dark")){
-                    modeText.innerText = "Világos mód";
-                    logo.src = '../../open-book.png';
-                } else {
-                    modeText.innerText = "Sötét mód";
-                    logo.src = '../../book.png';
-                }
-            });
-        });
-    </script>
+    
+    <script src="../../script/pdf_reader.js"></script> <!-- A külső script -->
 </body>
 </html>
