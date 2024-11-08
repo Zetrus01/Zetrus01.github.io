@@ -58,6 +58,63 @@ body.dark{
 .sidebar.close{
     width: 88px;
 }
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Kisebb szélesség */
+    }
+    
+    .sidebar.close {
+        width: 70px; /* Kisebb szélesség bezárt állapotban */
+    }
+    
+    .home {
+        left: 200px; /* Igazítás a kisebb sidebar szélességhez */
+        width: calc(100% - 200px);
+    }
+    
+    .sidebar.close ~ .home {
+        left: 70px;
+        width: calc(100% - 70px);
+    }
+}
+
+/* Nagyon kis kijelzőkhöz (pl. mobiltelefonok) */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 150px; /* Még kisebb szélesség */
+        padding: 10px; /* Padding hozzáadása */
+        max-height: 100vh; /* Magasság korlátozása */
+    }
+    
+    .sidebar.close {
+        width: 60px; /* Kisebb szélesség bezárt állapotban */
+    }
+    
+    .home {
+        left: 150px;
+        width: calc(100% - 150px);
+    }
+    
+    .sidebar.close ~ .home {
+        left: 60px;
+        width: calc(100% - 60px);
+    }
+
+    /* Szöveg és ikonok méretének csökkentése */
+    .sidebar .text {
+        font-size: 14px; /* Betűméret csökkentése */
+    }
+
+    .sidebar .icon {
+        font-size: 18px; /* Ikon méretének csökkentése */
+    }
+
+    /* Menü elemek méretének csökkentése */
+    .sidebar .menu-item {
+        padding: 2px 5px; /* Kevesebb padding */
+        font-size: 12px; /* Még kisebb betűméret */
+    }
+}
 
 /* ===== Reusable code - Here ===== */
 .sidebar li{
@@ -365,11 +422,11 @@ body.dark .home .text{
     border-bottom:1px solid rgba(255,255,255,.5);
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
   }
-  #harryPotterContainer, #witcherContainer {
+  #harryPotterContainer, #witcherContainer #FourthWingsContainer{
     text-align: center; /* Középre igazítja a tartalmat a konténeren belül */
 }
 
-#harryPotterContainer .title , #witcherContainer .title{
+#harryPotterContainer .title , #witcherContainer .title, #FourthWingsContainer .title{
     display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
     font-size: 1.5em;
     font-weight: bold;
@@ -413,7 +470,83 @@ body.dark .home .text{
       flex-direction: row;
       align-items: center;
     }
+    @media (max-width: 768px) {
+        .container {
+            margin: 20px auto; /* Margó automatikus középre igazítással */
+            width: 90%; /* Szélesség 90%-ra állítva */
+            height: auto; /* Magasság automatikusan, hogy alkalmazkodjon a tartalomhoz */
+            display: flex;
+            flex-wrap: wrap; /* Flex elemek oszloppá alakítása */
+            justify-content: center;
+            gap: 10px;
+        }
     
+        .container img {
+            width: 45%; /* Képek szélessége 45% a két oszlopos elrendezéshez */
+            max-width: 150px; /* Maximum szélesség, hogy ne legyenek túl nagyok */
+            height: auto; /* Magasság automatikusan */
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.684);
+            transition: transform ease-in-out 0.5s; /* Átmenet a transform-ra */
+        }
+    
+        .container img:hover {
+            transform: scale(1.1); /* Nagyítás hover esetén */
+        }
+    
+        #harryPotterContainer .title, 
+        #witcherContainer .title, 
+        #FourthWingsContainer .title {
+            display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px; /* Csökkentett távolság a képek és a cím között */
+            position: relative; /* Pozíció relatív */
+            text-align: center; /* Cím középre igazítása */
+            z-index: 1; /* Címek a képek felett */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .container {
+            width: 85%; /* Szélesség 85%-ra állítva mobil eszközökön */
+            height: auto; /* Magasság automatikusan, hogy alkalmazkodjon a tartalomhoz */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Flex elemek oszloppá alakítása */
+            gap: 10px;
+            padding-left: 2.2%; /* Bal oldali padding */
+            padding-right: 2.2%; /* Jobb oldali padding */
+            margin: 0 auto; /* Középre igazítás */
+        }
+    
+        .container img {
+            width: calc(50% - 10px); /* Képek szélessége 50% minusz a gap mérete */
+            max-width: 150px; /* Maximum szélesség, hogy ne legyenek túl nagyok */
+            height: auto; /* Magasság automatikusan */
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.684);
+            transition: transform ease-in-out 0.5s; /* Csak a transform-ra alkalmazzuk az átmenetet */
+        }
+    
+        .container img:hover {
+            transform: scale(1.2); /* Nagyítás hover esetén */
+        } 
+    
+        #harryPotterContainer .title, 
+        #witcherContainer .title, 
+        #FourthWingsContainer .title {
+            display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px; /* Csökkentett távolság a képek és a cím között */
+            position: relative; /* Pozíció relatív */
+            text-align: center; /* Cím középre igazítása */
+            z-index: 1; /* Címek a képek felett */
+        }
+    }
     .arrow-wrapper {
         display: flex; /* Use flexbox for the arrow wrapper */
         align-items: center; /* Center the arrow vertically */
@@ -471,3 +604,17 @@ body.dark .home .text{
         color: #333;
         text-decoration: none;
     }
+    .searchable-link {
+        display: inline-block; /* vagy inline-flex, ha jobban illeszkedik az elrendezéshez */
+        width: 100%;
+        height: 100%;
+        text-decoration: none; /* hivatkozás alatti vonal eltávolítása */
+    }
+    
+    .searchable-link .searchable-image {
+        width: 100%;
+        height: auto; /* a magasság automatikus, hogy megtartsa az arányokat */
+        border-radius: 5px; /* a kép sarkainak lekerekítése */
+        display: block;
+    }
+    
