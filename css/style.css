@@ -525,9 +525,11 @@ body.dark .home .text{
             width: 85%; /* Szélesség 85%-ra állítva mobil eszközökön */
             height: auto; /* Magasság automatikusan, hogy alkalmazkodjon a tartalomhoz */
             display: flex;
+            position: relative;
             justify-content: center;
             flex-wrap: wrap; /* Flex elemek oszloppá alakítása */
             gap: 10px;
+            left:8%;
             padding-left: 2.2%; /* Bal oldali padding */
             padding-right: 2.2%; /* Jobb oldali padding */
             margin: 0 auto; /* Középre igazítás */
@@ -557,10 +559,10 @@ body.dark .home .text{
             font-size: 1.5em;
             font-weight: bold;
             margin-bottom: 5px; /* Csökkentett távolság a képek és a cím között */
-            position: absolute; /* Pozíció relatív */
+            position:relative; /* Pozíció relatív */
             text-align: center; /* Cím középre igazítása */
             z-index: 1; /* Címek a képek felett */
-            margin-top: -10%;
+            margin-top: 10%;
             padding-bottom: 4%;
         }
         
@@ -609,6 +611,7 @@ body.dark .home .text{
             justify-content: center;
             gap: 10px;
             padding-top: 4%;
+            margin-bottom: 2%;;
         }
     
         .container img {
@@ -631,11 +634,11 @@ body.dark .home .text{
             display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
             font-size: 1.5em;
             font-weight: bold;
-            margin-bottom: 5px; 
+            margin-bottom: 2%; 
             position:absolute;
             text-align: center; /* Cím középre igazítása */
             z-index: 1; /* Címek a képek felett */
-            margin-top: -9%;
+            margin-top: -12%;
             padding-top: 3%;
         }
     
