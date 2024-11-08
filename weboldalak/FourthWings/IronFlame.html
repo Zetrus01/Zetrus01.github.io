@@ -59,13 +59,42 @@
                 display: none; /* Mobil képernyőn nem jelenik meg */
             }
             canvas {
-            max-width: 40%; /* Canvas maximum szélessége a konténer szélessége */
-            height: 120%; /* Magasság automatikusan */
+            max-width: 50%; /* Canvas maximum szélessége a konténer szélessége */
+            max-height: auto; /* Magasság automatikusan */
             border: 1px solid black;
             border-radius: 15px;
-            margin-left: 10%;
             margin-top:20%;
         }  
+        #pdf-render {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            left:7%;
+            margin-top: 5px;
+            height:120%;
+        }
+        #prev-page {
+            left: 13%;
+            position: absolute; /* Bal oldal */
+            top: 65%; /* Középre igazítás */
+            transform: translateY(-50%); /* Középre igazítás */
+        }
+
+        #next-page {
+            right: 12.5%; /* Jobb oldal */
+            top: 65%;
+            position: absolute; /* Középre igazítás */
+            transform: translateY(-50%); /* Középre igazítás */
+        }
+        #page-info {
+            text-align: center; /* Középre igazítás */
+            margin-top: 10px; /* Térköz a gombok alatt */
+            font-size: 18px; /* Betűméret */
+            position: absolute;
+            left:50%;
+        }
         }
 
         /* Nagyobb képernyőkön mindkét oldal és a gombok is megjelennek */
