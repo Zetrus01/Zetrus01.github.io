@@ -8,53 +8,83 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <title>Kétoldalas PDF Megjelenítő</title>
+    <title>Halálparancs</title>
     <style>
         #pdf-render {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        canvas {
-            max-width: 37%; /* Canvas maximum szélessége a konténer szélessége */
-            height: auto; /* Magasság automatikusan */
-            border: 1px solid black;
-            border-radius: 15px;
-        }   
-
-        #next-page, #prev-page {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 5px;
-            z-index: 10; /* Gombok a háttér előtt */
-        }
-
-        #prev-page {
-            left: 0px; /* Bal oldal */
-            top: 50%; /* Középre igazítás */
-            transform: translateY(-50%); /* Középre igazítás */
-        }
-
-        #next-page {
-            right: 0px; /* Jobb oldal */
-            top: 50%; /* Középre igazítás */
-            transform: translateY(-50%); /* Középre igazítás */
-        }
-
-        #page-info {
-            text-align: center; /* Középre igazítás */
-            margin-top: 10px; /* Térköz a gombok alatt */
-            font-size: 18px; /* Betűméret */
-        }
-    </style>
+                   position: relative;
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                   gap: 10px;
+                   margin-top: 5px;
+               }
+       
+               canvas {
+                   max-width: 37%; /* Canvas maximum szélessége a konténer szélessége */
+                   height: auto; /* Magasság automatikusan */
+                   border: 1px solid black;
+                   border-radius: 15px;
+               }   
+       
+               #next-page, #prev-page {
+                   background-color: #007bff;
+                   color: white;
+                   border: none;
+                   padding: 10px 15px;
+                   cursor: pointer;
+                   font-size: 14px;
+                   border-radius: 5px;
+                   z-index: 10; /* Gombok a háttér előtt */
+               }
+       
+               #prev-page {
+                   left: 0px; /* Bal oldal */
+                   top: 50%; /* Középre igazítás */
+                   transform: translateY(-50%); /* Középre igazítás */
+               }
+       
+               #next-page {
+                   right: 0px; /* Jobb oldal */
+                   top: 50%; /* Középre igazítás */
+                   transform: translateY(-50%); /* Középre igazítás */
+               }
+       
+               #page-info {
+                   text-align: center; /* Középre igazítás */
+                   margin-top: 10px; /* Térköz a gombok alatt */
+                   font-size: 18px; /* Betűméret */
+               }
+               @media (max-width: 460px) {
+                   #pdf-canvas-2 {
+                       display: none; /* Mobil képernyőn nem jelenik meg */
+                   }
+                   canvas {
+                   max-width: 40%; /* Canvas maximum szélessége a konténer szélessége */
+                   height: 120%; /* Magasság automatikusan */
+                   border: 1px solid black;
+                   border-radius: 15px;
+                   margin-left: 10%;
+                   margin-top:20%;
+               }  
+               }
+       
+               /* Nagyobb képernyőkön mindkét oldal és a gombok is megjelennek */
+               @media (min-width: 768px) {
+                   #pdf-canvas-2 {
+                       display: block; /* A második canvas csak nagyobb képernyőkön jelenik meg */
+                   }
+       
+                   #next-page {
+                       display: inline-block;
+                   }
+                   canvas {
+                   max-width: 40%; /* Canvas maximum szélessége a konténer szélessége */
+                   height: auto; /* Magasság automatikusan */
+                   border: 1px solid black;
+                   border-radius: 15px;
+               }  
+               }
+           </style>
 </head>
 <body>
     <nav class="sidebar close">
@@ -121,9 +151,10 @@
     <!-- PDF.js CDN betöltése -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script>
-        window.pdfUrl = '../../pdf/HarryPotter/HarryPotter-2.pdf';  // Globális változó
+        window.pdfUrl = '../../pdf/MazeRunner/Halalparancs.pdf';  // Globális változó
     </script>
     
     <script src="../../script/pdf_reader.js"></script> <!-- A külső script -->
     <script src="../../script/script_pdf.js"></script>
+</body>
 </html>
