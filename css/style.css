@@ -1,10 +1,10 @@
 /* Google Font Import - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Solway', sans-serif;
 }
 
 :root{
@@ -366,11 +366,11 @@ body.dark .home .text{
     border-bottom:1px solid rgba(255,255,255,.5);
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
   }
-  #harryPotterContainer, #witcherContainer #FourthWingsContainer{
+  #harryPotterContainer, #witcherContainer ,#FourthWingsContainer ,#MazeRunner,#LOTR,#HungerGames{
     text-align: center; /* Középre igazítja a tartalmat a konténeren belül */
 }
 
-#harryPotterContainer .title , #witcherContainer .title, #FourthWingsContainer .title{
+#harryPotterContainer .title , #witcherContainer .title, #FourthWingsContainer .title, #MazeRunner .title,#LOTR .title,#HungerGames .title {
     display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
     font-size: 1.5em;
     font-weight: bold;
@@ -554,7 +554,10 @@ body.dark .home .text{
     
         #harryPotterContainer .title, 
         #witcherContainer .title, 
-        #FourthWingsContainer .title {
+        #FourthWingsContainer .title,
+        #MazeRunner .title,
+        #LOTR .title,
+        #HungerGames .title  {
             display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
             font-size: 1.5em;
             font-weight: bold;
@@ -630,7 +633,10 @@ body.dark .home .text{
         }
         #harryPotterContainer .title, 
         #witcherContainer .title, 
-        #FourthWingsContainer .title {
+        #FourthWingsContainer .title,
+        #MazeRunner .title,
+        #LOTR .title,
+        #HungerGames .title {
             display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
             font-size: 1.5em;
             font-weight: bold;

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Solway', sans-serif;
+  font-size: 18px;
 }
 
 body {
@@ -62,7 +65,7 @@ main {
   display: none;
 
   & .title {
-    font-family: 'arial-black';
+    font-family: 'Solway';
     text-transform: uppercase;
   }
 
