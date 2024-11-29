@@ -315,7 +315,7 @@ body.dark .home .text{
     height: fit-content;
     position: relative;
     margin-top:1%;
-    margin-left: 80%;
+    margin-left: 74%;
   }
   .input-search{
     height: 50px;
@@ -366,11 +366,11 @@ body.dark .home .text{
     border-bottom:1px solid rgba(255,255,255,.5);
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
   }
-  #harryPotterContainer, #witcherContainer ,#FourthWingsContainer ,#MazeRunner,#LOTR,#HungerGames{
+  #harryPotterContainer, #witcherContainer ,#FourthWingsContainer ,#MazeRunner,#LOTR,#HungerGames,#Eragon{
     text-align: center; /* Középre igazítja a tartalmat a konténeren belül */
 }
 
-#harryPotterContainer .title , #witcherContainer .title, #FourthWingsContainer .title, #MazeRunner .title,#LOTR .title,#HungerGames .title {
+#harryPotterContainer .title , #witcherContainer .title, #FourthWingsContainer .title, #MazeRunner .title,#LOTR .title,#HungerGames .title,#Eragon .title {
     display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
     font-size: 1.5em;
     font-weight: bold;
@@ -557,7 +557,8 @@ body.dark .home .text{
         #FourthWingsContainer .title,
         #MazeRunner .title,
         #LOTR .title,
-        #HungerGames .title  {
+        #HungerGames .title,
+        #Eragon .title  {
             display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
             font-size: 1.5em;
             font-weight: bold;
@@ -636,7 +637,8 @@ body.dark .home .text{
         #FourthWingsContainer .title,
         #MazeRunner .title,
         #LOTR .title,
-        #HungerGames .title {
+        #HungerGames .title,
+        #Eragon .title {
             display: block; /* Biztosítja, hogy a cím teljes szélességben külön sorban legyen */
             font-size: 1.5em;
             font-weight: bold;
