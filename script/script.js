@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
           modeSwitch = body.querySelector(".toggle-switch"),
           modeText = body.querySelector(".mode-text"),
           logo = sidebar.querySelector('#logo');
+          home = sidebar.querySelector('.icon-home');
+          trendy = sidebar.querySelector('.icon-trendy');
+          texts = sidebar.querySelector('.icon-texts');
+          proposition = sidebar.querySelector('.icon-proposition');
+          liked = sidebar.querySelector('.icon-liked');
+          language = sidebar.querySelector('.icon-language');
+          login = sidebar.querySelector('.icon-login')
 
     toggle.addEventListener("click" , () => {
         sidebar.classList.toggle("close");
@@ -16,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if(body.classList.contains("dark")){
             modeText.innerText = "Világos mód";
-            logo.src = 'open-book.png'; // Dark mode logo path
+            logo.src = 'book.png'; // Dark mode logo path
         } else {
             modeText.innerText = "Sötét mód";
-            logo.src = 'book.png'; // Light mode logo path
+            logo.src = 'open-book.png'; // Light mode logo path
         }
     });
 });
